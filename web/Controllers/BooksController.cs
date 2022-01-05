@@ -21,10 +21,24 @@ namespace web.Controllers
         }
 
         // GET: Books
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(string sortOrder)
         {
-            var libraryContext = _context.Books.Include(b => b.Author).Include(b => b.Bookstore);
-            return View(await libraryContext.ToListAsync());
+            //var libraryContext = _context.Books.Include(b => b.Author).Include(b => b.Bookstore);
+            //return View(await libraryContext.ToListAsync());
+
+            ViewData["NameSortParm"] = String.IsNullOrEmpty(sortOrder) ? "name_desc" : "";
+            var books = from b in _context.Books.Include(b => b.Author).Include(b => b.Bookstore)
+                        select b;
+            switch (sortOrder)
+            {
+                case "name_desc":
+                    books = books.OrderByDescending(b => b.Title);
+                    break;
+                default:
+                    books = books.OrderBy(b => b.GenreID);
+                    break;
+            }
+            return View(await books.AsNoTracking().ToListAsync());
         }
 
         // GET: Books/Details/5
