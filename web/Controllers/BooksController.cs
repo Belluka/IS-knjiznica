@@ -38,6 +38,7 @@ namespace web.Controllers
             var book = await _context.Books
                 .Include(b => b.Author)
                 .Include(b => b.Bookstore)
+                .Include(b => b.Genres)
                 .FirstOrDefaultAsync(m => m.BookID == id);
             if (book == null)
             {
