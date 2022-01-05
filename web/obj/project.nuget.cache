@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "YIyvkrhbqVgqoSRO+3wyOHocumSu6VkJEL8ox5X3hKRP6kHTw5ruILRTU9KHQAeFwK+4wBLet48nv00Vk2B64A==",
+  "dgSpecHash": "RFWz52cuOdg77Rb41Fg6QhyO4FgGLn7wfuBU/4cAVmhl5Df+yTwfXxWES1oWWgftze8RcG5zK96F4qxco5naPw==",
   "success": true,
-  "projectFilePath": "E:\\FAKs\\IS\\knjiznica\\web\\web.csproj",
+  "projectFilePath": "E:\\FAKs\\IS\\e-knjiznica\\web\\web.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\bello\\.nuget\\packages\\humanizer.core\\2.8.26\\humanizer.core.2.8.26.nupkg.sha512",
     "C:\\Users\\bello\\.nuget\\packages\\messagepack\\2.1.152\\messagepack.2.1.152.nupkg.sha512",

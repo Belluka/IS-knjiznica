@@ -9874,11 +9874,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "E:\\FAKs\\IS\\knjiznica\\web\\web.csproj",
+      "projectUniqueName": "E:\\FAKs\\IS\\e-knjiznica\\web\\web.csproj",
       "projectName": "web",
-      "projectPath": "E:\\FAKs\\IS\\knjiznica\\web\\web.csproj",
+      "projectPath": "E:\\FAKs\\IS\\e-knjiznica\\web\\web.csproj",
       "packagesPath": "C:\\Users\\bello\\.nuget\\packages\\",
-      "outputPath": "E:\\FAKs\\IS\\knjiznica\\web\\obj\\",
+      "outputPath": "E:\\FAKs\\IS\\e-knjiznica\\web\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\bello\\AppData\\Roaming\\NuGet\\NuGet.Config"
@@ -9944,7 +9944,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.100\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.101\\RuntimeIdentifierGraph.json"
       }
     }
   }

@@ -6,7 +6,7 @@ using Microsoft.AspNetCore.Identity;
 
 var builder = WebApplication.CreateBuilder(args);
 
-var connectionString = builder.Configuration.GetConnectionString("LibraryContext");
+var connectionString = builder.Configuration.GetConnectionString("AzureContext");
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
