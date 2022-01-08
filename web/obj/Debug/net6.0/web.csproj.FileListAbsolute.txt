@@ -1078,3 +1078,7 @@ E:\FAKs\IS-seminar\e-knjiznica\web\obj\Debug\net6.0\web.dll
 E:\FAKs\IS-seminar\e-knjiznica\web\obj\Debug\net6.0\ref\web.dll
 E:\FAKs\IS-seminar\e-knjiznica\web\obj\Debug\net6.0\web.pdb
 E:\FAKs\IS-seminar\e-knjiznica\web\obj\Debug\net6.0\web.genruntimeconfig.cache
+E:\FAKs\IS-seminar\e-knjiznica\web\bin\Debug\net6.0\Microsoft.OpenApi.dll
+E:\FAKs\IS-seminar\e-knjiznica\web\bin\Debug\net6.0\Swashbuckle.AspNetCore.Swagger.dll
+E:\FAKs\IS-seminar\e-knjiznica\web\bin\Debug\net6.0\Swashbuckle.AspNetCore.SwaggerGen.dll
+E:\FAKs\IS-seminar\e-knjiznica\web\bin\Debug\net6.0\Swashbuckle.AspNetCore.SwaggerUI.dll
