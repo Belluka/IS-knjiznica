@@ -1,10 +1,10 @@
-@model IEnumerable<web.Models.Bookstore>
+@model web.Models.BookstoreViewModels.BookstoreIndexData
 
 @{
-    ViewData["Title"] = "Bookstores";
+    ViewData["Title"] = "BookstoresView";
 }
 
-<h1>Bookstores</h1>
+<h1>Bookstores view</h1>
 
 <p>
     <a asp-action="Create">Create New</a>
@@ -13,7 +13,7 @@
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.Location)
+                @Html.DisplayNameFor(model => model.Books)
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.Employees)
@@ -22,13 +22,19 @@
         </tr>
     </thead>
     <tbody>
-@foreach (var item in Model) {
-        <tr>
+@foreach (var item in Model.Bookstores) {
+        string selectedRow = "";
+                if (item.BookstoreId == (int?)ViewData["BookstoreID"])
+                {
+                    selectedRow = "table-success";
+                }
+                <tr class="@selectedRow">
+                    
             <td>
                 @Html.DisplayFor(modelItem => item.Location)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Employees)
+                @Html.DisplayFor(modelItem => item.DateEdited)
             </td>
             <td>
                 <a asp-action="Edit" asp-route-id="@item.BookstoreId">Edit</a> |

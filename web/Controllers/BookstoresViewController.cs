@@ -6,35 +6,49 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using web.Data;
+using web.Models.BookstoreViewModels;
 using web.Models;
-using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Identity;
 
 namespace web.Controllers
 {
-    [Authorize]
-    public class BookstoresController : Controller
+    public class BookstoresViewController : Controller
     {
         private readonly LibraryContext _context;
 
-        private readonly UserManager<ApplicationUser> _usermanager;
-
-        public BookstoresController(LibraryContext context, UserManager<ApplicationUser> userManager)
+        public BookstoresViewController(LibraryContext context)
         {
             _context = context;
-            _usermanager = userManager;
         }
 
-        // GET: Bookstores
-        public async Task<IActionResult> Index()
+        // GET: BookstoresView
+        public async Task<IActionResult> Index(int? id, int? bookstoreID)
         {
-            var bookstores = _context.Bookstores
-            .Include(e => e.Employees)
-            .AsNoTracking();
-            return View(await _context.Bookstores.ToListAsync());
+            var viewModel = new BookstoreIndexData();
+            viewModel.Bookstores = await _context.Bookstores
+                .Include(i => i.Books)
+                .Include(i => i.Employees)
+                    .ThenInclude(i => i.EmployeeID)
+                .Include(i => i.Location)
+                .AsNoTracking()
+                .OrderBy(i => i.BookstoreId)
+                .ToListAsync();
+            
+            if (id != null)
+            {
+                ViewData["BookstoreID"] = id.Value;
+                Bookstore bookstore = viewModel.Bookstores.Where(
+                    i => i.BookstoreId == id.Value).Single();
+            }
+
+            if (bookstoreID != null)
+            {
+                ViewData["BookstoreID"] = bookstoreID.Value;
+            }
+
+            return View(viewModel);
         }
 
-        // GET: Bookstores/Details/5
+        // GET: BookstoresView/Details/5
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
@@ -52,27 +66,21 @@ namespace web.Controllers
             return View(bookstore);
         }
 
-        // GET: Bookstores/Create
-        [Authorize(Roles="Administrator, Manager")]
+        // GET: BookstoresView/Create
         public IActionResult Create()
         {
             return View();
         }
 
-        // POST: Bookstores/Create
+        // POST: BookstoresView/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        [Authorize(Roles="Administrator, Manager")]
-        public async Task<IActionResult> Create([Bind("BookstoreId,Location")] Bookstore bookstore)
+        public async Task<IActionResult> Create([Bind("BookstoreId,Location,DateEdited")] Bookstore bookstore)
         {
-            var currentUser = await _usermanager.GetUserAsync(User);
-
             if (ModelState.IsValid)
             {
-                bookstore.DateEdited = DateTime.Now;
-                bookstore.Owner = currentUser;
                 _context.Add(bookstore);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
@@ -80,8 +88,7 @@ namespace web.Controllers
             return View(bookstore);
         }
 
-        // GET: Bookstores/Edit/5
-        [Authorize(Roles="Administrator, Manager")]
+        // GET: BookstoresView/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -97,13 +104,12 @@ namespace web.Controllers
             return View(bookstore);
         }
 
-        // POST: Bookstores/Edit/5
+        // POST: BookstoresView/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        [Authorize(Roles="Administrator, Manager")]
-        public async Task<IActionResult> Edit(int id, [Bind("BookstoreId,Location")] Bookstore bookstore)
+        public async Task<IActionResult> Edit(int id, [Bind("BookstoreId,Location,DateEdited")] Bookstore bookstore)
         {
             if (id != bookstore.BookstoreId)
             {
@@ -133,8 +139,7 @@ namespace web.Controllers
             return View(bookstore);
         }
 
-        // GET: Bookstores/Delete/5
-        [Authorize(Roles="Administrator, Manager")]
+        // GET: BookstoresView/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
@@ -152,10 +157,9 @@ namespace web.Controllers
             return View(bookstore);
         }
 
-        // POST: Bookstores/Delete/5
+        // POST: BookstoresView/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        [Authorize(Roles="Administrator, Manager")]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
             var bookstore = await _context.Bookstores.FindAsync(id);
