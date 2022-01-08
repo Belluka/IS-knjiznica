@@ -22,14 +22,20 @@ namespace web.Controllers
 
         // GET: Books
         //test
-        public async Task<IActionResult> Index(string sortOrder)
+        public async Task<IActionResult> Index(string sortOrder, string searchString)
         {
             //var libraryContext = _context.Books.Include(b => b.Author).Include(b => b.Bookstore);
             //return View(await libraryContext.ToListAsync());
 
             ViewData["NameSortParm"] = String.IsNullOrEmpty(sortOrder) ? "name_desc" : "";
+            ViewData["CurrentFilter"] = searchString;
             var books = from b in _context.Books.Include(b => b.Author).Include(b => b.Bookstore)
                         select b;
+            if (!String.IsNullOrEmpty(searchString))
+            {
+                books = books.Where(b => b.Title.Contains(searchString)
+                                    || b.Author.LastName.Contains(searchString));
+            }
             switch (sortOrder)
             {
                 case "name_desc":

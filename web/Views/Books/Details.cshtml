@@ -11,12 +11,6 @@
     <hr />
     <dl class="row">
         <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.GenreID)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.GenreID)
-        </dd>
-        <dt class = "col-sm-2">
             @Html.DisplayNameFor(model => model.Title)
         </dt>
         <dd class = "col-sm-10">
@@ -33,6 +27,28 @@
         </dt>
         <dd class = "col-sm-10">
             @Html.DisplayFor(model => model.Author.LastName)
+        </dd>
+        <dt class="col-sm-2">
+        @Html.DisplayNameFor(model => model.Genres)
+        </dt>
+        <dd class="col-sm-10">
+            <table class="table">
+                <tr>
+                    <th>Genre ID</th>
+                    <th>Genre name</th>
+                </tr>
+                @foreach (var item in Model.Genres)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.GenreID)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.GenreName)
+                        </td>
+                    </tr>
+                }
+            </table>
         </dd>
     </dl>
 </div>
