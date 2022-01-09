@@ -7,11 +7,13 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using web.Data;
 using web.Models;
+using web.Filters;
 
 namespace web.Controllers_Api
 {
     [Route("api/v1/Staff")]
     [ApiController]
+    [ApiKeyAuth]
     public class EmployeesApiController : ControllerBase
     {
         private readonly LibraryContext _context;
@@ -23,6 +25,7 @@ namespace web.Controllers_Api
 
         // GET: api/EmployeesApi
         [HttpGet]
+        [ApiKeyAuth]
         public async Task<ActionResult<IEnumerable<Employee>>> GetEmployees()
         {
             return await _context.Employees.ToListAsync();
@@ -30,6 +33,7 @@ namespace web.Controllers_Api
 
         // GET: api/EmployeesApi/5
         [HttpGet("{id}")]
+        [ApiKeyAuth]
         public async Task<ActionResult<Employee>> GetEmployee(int id)
         {
             var employee = await _context.Employees.FindAsync(id);
@@ -45,6 +49,7 @@ namespace web.Controllers_Api
         // PUT: api/EmployeesApi/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("{id}")]
+        [ApiKeyAuth]
         public async Task<IActionResult> PutEmployee(int id, Employee employee)
         {
             if (id != employee.EmployeeID)
@@ -76,6 +81,7 @@ namespace web.Controllers_Api
         // POST: api/EmployeesApi
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]
+        [ApiKeyAuth]
         public async Task<ActionResult<Employee>> PostEmployee(Employee employee)
         {
             _context.Employees.Add(employee);
@@ -86,6 +92,7 @@ namespace web.Controllers_Api
 
         // DELETE: api/EmployeesApi/5
         [HttpDelete("{id}")]
+        [ApiKeyAuth]
         public async Task<IActionResult> DeleteEmployee(int id)
         {
             var employee = await _context.Employees.FindAsync(id);
