@@ -11,6 +11,8 @@ s dodatnimi privilegiji, pa lahko nadzorujejo tudi zaposlene.
 <img src="webapp2.png">
 <img src="webapp3.png">
 
+Slika modela v PowerDesignerju
+<img src="sql_model">
 
 Nalogo sem izdelal sam.
 
